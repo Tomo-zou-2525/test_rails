@@ -15,6 +15,19 @@ class BoardsController < ApplicationController
 	  @board = Board.find(params[:id])
 	end
 
+	def edit
+	  @board = Board.find(params[:id])
+	end
+
+	def update
+	  # 変数boardにfindメソッドでIDを取得した値を代入
+	  board = Board.find(params[:id])
+	  # updateアクションで保存_引数にはストロングパラメータで
+	  board.update(board_params)
+
+	  redirect_to board
+	end
+
 	private
 
 	def board_params
