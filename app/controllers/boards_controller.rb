@@ -9,6 +9,8 @@ class BoardsController < ApplicationController
 
 	def create
 	  Board.create(board_params)
+
+	  redirect_to board
 	end
 
 	def show
@@ -25,7 +27,17 @@ class BoardsController < ApplicationController
 	  # updateアクションで保存_引数にはストロングパラメータで
 	  board.update(board_params)
 
+	  # redirect先はオブジェクトでも構わない
 	  redirect_to board
+	end
+
+	def destroy
+	# 　特定のIDに対して何かするので、findで取得するようにする
+	  board = Board.find(params[:id])
+	  board.destroy
+
+	  # resourceベースルーティングでは、controllerでもpathを生成することができるので、以下の書き方が可
+	  redirect_to boards_path
 	end
 
 	private
