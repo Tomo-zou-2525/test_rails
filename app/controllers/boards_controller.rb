@@ -36,8 +36,8 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	def show
 	  # @board = Board.find(params[:id])
 
+    # アソシエーションによって使用できるメソッド
     @comment = @board.comments.new
-    binding.pry
 	end
 
 	def edit

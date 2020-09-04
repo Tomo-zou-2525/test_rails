@@ -16,5 +16,7 @@
 <!-- オブジェクトというキーに対して変数を渡すと、partialで参照されたファイル名の、_ を抜いた変数名が作成されるー（この場合はboard） -->
 <%= render partial: 'board', object: @board %>
 
+<%= render partial: 'comment_form', locals: { comment: @comment } %>
+
 <!-- また、省略した形でこのような書き方にもできる -->
 <!-- <%= render @board %> -->
