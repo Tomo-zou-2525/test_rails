@@ -13,7 +13,7 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	end
 
 	def new
-	  @board = Board.new
+	  @board = Board.new(flash[:board])
 	end
 
 	def create
