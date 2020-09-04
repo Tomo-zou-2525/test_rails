@@ -1,16 +1,12 @@
 <div class="d-flex align-items-center mt-4 mb-4">
   <div class="ml-auto boards__linkBox">
     <%= link_to "一覧", boards_path, class: 'btn btn-outline-dark' %>
-    <%= link_to "編集", edit_board_path, class: 'btn btn-outline-dark' %>
+    <!-- 編集対象のオブジェクトを引数に渡す事で ↓ 、そのIDを取得できる -->
+    <%= link_to "編集", edit_board_path(@board), class: 'btn btn-outline-dark' %>
   </div>
 </div>
+<!-- オブジェクトというキーに対して変数を渡すと、partialで参照されたファイル名の、_ を抜いた変数名が作成されるー（この場合はboard） -->
+<%= render partial: 'board', object: @board %>
 
-<div class="card">
-  <div class="card-header">
-    <h4><%= @board.title %></h4>
-  </div>
-  <div class="card-body">
-    <p class="card-text"><%= simple_format@board.body %></p>
-    <p class="text-right font-weight-bold mr-10"><%= @board.name %></p>
-  </div>
-</div>
+<!-- また、省略した形でこのような書き方にもできる -->
+<!-- <%= render @board %> -->
