@@ -1,4 +1,9 @@
 class BoardsController < ApplicationController
+# ControllerClassの中にbefor_actionは構文
+# その引数に、シンボル型でオブジェクトを定義してあげるとOK！
+before_action :set_target_params, only: %i[show edit update destroy]
+								     # %記号でシンボルの配列を定義
+
 	def index
 	  @boards = Board.all
 	end
@@ -8,33 +13,33 @@ class BoardsController < ApplicationController
 	end
 
 	def create
-	  Board.create(board_params)
+	  board = Board.create(board_params)
 
 	  redirect_to board
 	end
 
 	def show
-	  @board = Board.find(params[:id])
+	  # @board = Board.find(params[:id])
 	end
 
 	def edit
-	  @board = Board.find(params[:id])
+	  # @board = Board.find(params[:id])
 	end
 
 	def update
 	  # 変数boardにfindメソッドでIDを取得した値を代入
-	  board = Board.find(params[:id])
+	  # board = Board.find(params[:id])
 	  # updateアクションで保存_引数にはストロングパラメータで
-	  board.update(board_params)
+	  @board.update(board_params)
 
 	  # redirect先はオブジェクトでも構わない
-	  redirect_to board
+	  redirect_to @board
 	end
 
 	def destroy
 	# 　特定のIDに対して何かするので、findで取得するようにする
-	  board = Board.find(params[:id])
-	  board.destroy
+	  # board = Board.find(params[:id])
+	  @board.destroy
 
 	  # resourceベースルーティングでは、controllerでもpathを生成することができるので、以下の書き方が可
 	  redirect_to boards_path
@@ -45,4 +50,8 @@ class BoardsController < ApplicationController
 	def board_params
 	  params.require(:board).permit(:name, :title, :body)
 	end 
+
+	def set_target_params
+	  @board = Board.find(params[:id])
+	end
 end
