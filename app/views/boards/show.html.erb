@@ -5,6 +5,14 @@
     <%= link_to "編集", edit_board_path(@board), class: 'btn btn-outline-dark' %>
   </div>
 </div>
+
+<!-- flash[:notice]があるかどうかのif文 -->
+<% if flash[:notice] %>
+  <div class="alert alert-primary">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <!-- オブジェクトというキーに対して変数を渡すと、partialで参照されたファイル名の、_ を抜いた変数名が作成されるー（この場合はboard） -->
 <%= render partial: 'board', object: @board %>
 
