@@ -37,7 +37,11 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	  # @board = Board.find(params[:id])
 
     # アソシエーションによって使用できるメソッド
-    @comment = @board.comments.new
+    # @comment = @board.comments.new
+    # ↑上記の記述だと、コメント一覧表示の際に、常に空のコメントが生成されてしまう
+
+    @comment = Comment.new(board_id: @board_id )
+    # ↑上記の記述では、Commentモデルのnewで初期化する際、board_idをセットして初期化する
 	end
 
 	def edit
