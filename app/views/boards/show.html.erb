@@ -14,7 +14,13 @@
 <% end %>
 
 <!-- オブジェクトというキーに対して変数を渡すと、partialで参照されたファイル名の、_ を抜いた変数名が作成されるー（この場合はboard） -->
-<%= render partial: 'board', object: @board %>
+<%= render @board %>
 
-<!-- また、省略した形でこのような書き方にもできる -->
-<!-- <%= render @board %> -->
+<div class="p-comment__list">
+  <div class="p-comment__listTitle">コメント</div>
+  <!-- 特定のオブジェクトの引数をrenderに渡した場合、自動的にモデル名のビューが使用され、対象の数だけ表示してくれる  app/views/comments/_comment.html.erbがコメントの数だけレンダリング-->
+  <%= render @board.comments %>
+</div>
+
+
+<%= render partial: 'comments/form', locals: { comment: @comment } %>
