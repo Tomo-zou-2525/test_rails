@@ -26,7 +26,7 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	  	flash[:notice] = "『  #{board.title}』の掲示板を作成しました"
 	    redirect_to board
 	  else
-	  	redirect_to new_board_path, flash: {
+	  	redirect_to :back, flash: {
 	  		board: board,
 	  		error_messages: board.errors.full_messages
 	  	}
@@ -40,8 +40,8 @@ before_action :set_target_params, only: %i[show edit update destroy]
     # @comment = @board.comments.new
     # ↑上記の記述だと、コメント一覧表示の際に、常に空のコメントが生成されてしまう
 
-    @comment = Comment.new(board_id: @board_id )
-    # ↑上記の記述では、Commentモデルのnewで初期化する際、board_idをセットして初期化する
+    @comment = Comment.new(board_id: @board.id )
+    # ↑上記の記述では、Commentモデルのnewで初期化する際、board_idをセットして初期化
 	end
 
 	def edit
@@ -59,20 +59,20 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	end
 
 	def destroy
-	# 　特定のIDに対して何かするので、findで取得するようにする
+	# 特定のIDに対して何かするので、findで取得するようにする
 	  # board = Board.find(params[:id])
 	  @board.delete
 
 	  # resourceベースルーティングでは、controllerでもpathを生成することができるので、以下の書き方が可
 	  redirect_to boards_path, flash: { notice: "『  #{@board.title}』の掲示板が削除されました" }
-	  						# 　　↑flashの別の書き方
+	  						# ↑flashの別の書き方
 	end
 
 	private
 
 	def board_params
 	  params.require(:board).permit(:name, :title, :body)
-	end 
+	end
 
 	def set_target_params
 	  @board = Board.find(params[:id])
