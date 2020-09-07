@@ -52,10 +52,20 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	  # 変数boardにfindメソッドでIDを取得した値を代入
 	  # board = Board.find(params[:id])
 	  # updateアクションで保存_引数にはストロングパラメータで
-	  @board.update(board_params)
+	  # @board.update(board_params)
 
 	  # redirect先はオブジェクトでも構わない
-	  redirect_to @board
+	  # redirect_to @board
+
+	  # ここからバリデーションの書き方
+	  if @board.update(board_params)
+	  	redirect_to @board
+	  else
+	  	redirect_to :back, flash: {
+	  		board: @board,
+	  		error_messages: @board.errors.full_messages
+	  	}
+	  end
 	end
 
 	def destroy
