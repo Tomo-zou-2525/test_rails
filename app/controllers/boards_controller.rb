@@ -4,7 +4,7 @@ class BoardsController < ApplicationController
 before_action :set_target_params, only: %i[show edit update destroy]
 								     # %記号でシンボルの配列を定義
 
-	def index 
+	def index
 	  # gem kaminari導入前↓
 	  # @boards = Board.all
 
