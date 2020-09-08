@@ -9,7 +9,7 @@ ja:
         name: 名前
         comment: コメント
       user:
-        naem: 名前
+        name: 名前
         password: パスワード
         password_confirmation: パスワード（ 確認 ）
   views:
