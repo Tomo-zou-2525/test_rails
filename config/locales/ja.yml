@@ -8,6 +8,10 @@ ja:
       comment:
         name: 名前
         comment: コメント
+      user:
+        name: 名前
+        password: パスワード
+        password_confirmation: パスワード（ 確認 ）
   views:
     pagination:
       first: 最初
