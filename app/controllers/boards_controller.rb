@@ -9,7 +9,12 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	  # @boards = Board.all
 
 	  # gem kaminari導入後↓
-	  @boards = Board.page(params[:page])
+	  # @boards = Board.page(params[:page])
+
+	  # タグ検索機能追加の記述
+	  # タグがあればタグからタグIDを取得、掲示板に紐づくタグのIDを取得・タグがなければ、一度board.allで取得
+		@boards = params[:tag_id].present? ? Tag.find(params[:tag_id]).boards : Board.all
+		@boards = @boards.page(params[:page]).order("created_at DESC")
 	end
 
 	def new
