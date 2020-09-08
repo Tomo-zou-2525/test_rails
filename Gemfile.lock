@@ -46,6 +46,7 @@ GEM
     autoprefixer-rails (9.8.6.3)
       execjs
     awesome_print (1.8.0)
+    bcrypt (3.1.16)
     bindex (0.8.1)
     bootstrap (4.0.0)
       autoprefixer-rails (>= 6.0.3)
@@ -198,6 +199,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bcrypt (~> 3.1.7)
   bootstrap (~> 4.0.0)
   byebug
   coffee-rails (~> 4.2)
