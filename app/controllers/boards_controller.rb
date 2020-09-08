@@ -71,7 +71,7 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	def destroy
 	# 特定のIDに対して何かするので、findで取得するようにする
 	  # board = Board.find(params[:id])
-	  @board.delete
+	  @board.destroy
 
 	  # resourceベースルーティングでは、controllerでもpathを生成することができるので、以下の書き方が可
 	  redirect_to boards_path, flash: { notice: "『  #{@board.title}』の掲示板が削除されました" }
@@ -81,7 +81,8 @@ before_action :set_target_params, only: %i[show edit update destroy]
 	private
 
 	def board_params
-	  params.require(:board).permit(:name, :title, :body)
+		# 末尾のtag_idsは、formビルダーのcolectioncheckboxの第一引数に指定したものを許可するための記述
+	  params.require(:board).permit(:name, :title, :body, tag_ids: [])
 	end
 
 	def set_target_params
